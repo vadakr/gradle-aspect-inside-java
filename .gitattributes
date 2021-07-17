@@ -1,0 +1,9 @@
+# default line endings are automatic (i.e. \r\n when checked out on Windows, \n on *nix/macOS)
+* text=auto
+
+# Explicitly declare line endings for specific file types - this will be applied at checkout
+*.sh text eol=lf
+gradlew text eol=lf
+*.bat text eol=crlf
+*.properties text eol=lf
+*.yaml text eol=lf

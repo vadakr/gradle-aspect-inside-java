@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+
+    // This plugin enhances the compileJava tasks of all source sets with an additional ajc action in order to
+    // perform post-compile-weaving.
+    // https://docs.freefair.io/gradle-plugins/6.0.0-m2/reference/#_io_freefair_aspectj_post_compile_weaving
+    id "io.freefair.aspectj.post-compile-weaving" version "5.3.3.3"
+}
+
+group 'org.example'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.aspectj:aspectjrt:1.9.6'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// Find and build all .java or .aj source files under any directory listed against -sourceroots
+// https://www.eclipse.org/aspectj/doc/next/devguide/ajc-ref.html
+compileJava.ajc.options.compilerArgs = ["-sourceroots", sourceSets.main.java.sourceDirectories.getAsPath() ]
